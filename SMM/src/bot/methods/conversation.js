@@ -14,7 +14,7 @@ async function deposit(conversation, ctx) {
       oxapay.createInvoice({ amount: parseFloat(ctx.message.text) })
         .then(async (response) => {
           if (response && response.result === 100 && response.message === "success") {
-            await ctx.reply(`<b>${ctx.from.first_name},<i>📥 Your Deposit link of ${ctx.message.text}$ is ready</i>\n\n📌 This process is automatic and your account would be funded immediately after your deposit is received</b>`, { parse_mode: "HTML", reply_markup: { inline_keyboard: [[{ text: "🏦 Deposit", web_app: { url: response.payLink } }]] } });
+            await ctx.reply(`<b>${ctx.from.first_name},<i>Your Deposit link of ${ctx.message.text}$ is ready📥 </i>\n\n📌 This process is automatic and your account would be funded immediately after your deposit is received</b>`, { parse_mode: "HTML", reply_markup: { inline_keyboard: [[{ text: "🏦 Deposit", web_app: { url: response.payLink } }]] } });
             await checkDeposit(ctx, response.trackId);
           } else {
             console.log(response);
